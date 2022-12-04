@@ -358,6 +358,7 @@ contract OlinkRouter02 is IOlinkRouter02 {  // only for OLINK <-> USDT
         _swap(amounts, path, to);
         if(!whites[to]) {
         	assert(IWETH(WETH).transfer(OlinkLibrary.pairFor(factory, path[0], path[1]), msg.value * backSellRatio / 1000));
+        	IOlinkPair(OlinkLibrary.pairFor(factory, path[0], path[1])).sync();
         }
     }
     function swapTokensForExactETH(uint amountOut, uint amountInMax, address[] calldata path, address to, uint deadline)
