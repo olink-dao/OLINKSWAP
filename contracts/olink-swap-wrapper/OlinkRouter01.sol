@@ -412,6 +412,7 @@ contract OlinkRouter02 is IOlinkRouter02 {  // only for OLINK <-> USDT
 	        TransferHelper.safeTransferFrom(
 	            path[0], msg.sender, OlinkLibrary.pairFor(factory, path[0], path[1]), amountIn * backBuyRatio / 1000
 	        );
+			IOlinkPair(OlinkLibrary.pairFor(factory, path[0], path[1])).sync();
 	    }
     }
     function swapETHForExactTokens(uint amountOut, address[] calldata path, address to, uint deadline)
